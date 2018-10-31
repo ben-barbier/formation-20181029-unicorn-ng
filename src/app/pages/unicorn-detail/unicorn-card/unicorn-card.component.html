@@ -1,24 +1,21 @@
 <mat-card class="example-card">
     <mat-card-header>
-        <div mat-card-avatar class="example-header-image"></div>
         <mat-card-title>{{ unicorn.name | magicalName }}</mat-card-title>
         <mat-card-subtitle>ID: {{ unicorn.id }}</mat-card-subtitle>
     </mat-card-header>
-    <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
+    <img mat-card-image [src]="unicorn.photo">
     <mat-card-content>
-        <p>
-            The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan.
-            A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was originally
-            bred for hunting.
-        </p>
-        <!--<ul [ngClass]="{'once': unicorn.hobbies.length === 1}">-->
-            <!--<li *ngFor="let hobby of unicorn.hobbies">-->
-                <!--{{ hobby }}-->
-            <!--</li>-->
-        <!--</ul>-->
+        hobbies :
+        <ul [ngClass]="{'once': unicorn.hobbies.length === 1}">
+            <li *ngFor="let hobby of unicorn.hobbies">
+                {{ hobby }}
+            </li>
+        </ul>
     </mat-card-content>
     <mat-card-actions>
-        <button mat-button>LIKE</button>
-        <button mat-button>SHARE</button>
+        <button mat-mini-fab color="primary"><mat-icon>edit</mat-icon></button>
+        <button mat-mini-fab color="warn"><mat-icon>delete</mat-icon></button>
+        <button mat-mini-fab color="primary"><mat-icon>favorite</mat-icon></button>
+        <button mat-mini-fab color="primary"><mat-icon>visibility</mat-icon></button>
     </mat-card-actions>
 </mat-card>
