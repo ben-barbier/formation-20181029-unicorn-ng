@@ -21,13 +21,17 @@
                 <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
             </button>
             <span>unicorn-ng</span>
+            <span>size : {{ (cart | async).length }} </span>
         </mat-toolbar>
 
         <!-- Add Content Here -->
-        <uni-unicorn-detail
-            [unicorn]="myUnicorn"
-            (ageUpdated)="alertHb()">
-        </uni-unicorn-detail>
+        <!--<uni-unicorn-detail-->
+            <!--[unicorn]="myUnicorn"-->
+            <!--(ageUpdated)="alertHb()">-->
+        <!--</uni-unicorn-detail>-->
+
+        <uni-unicorn-list></uni-unicorn-list>
+
 
     </mat-sidenav-content>
 </mat-sidenav-container>

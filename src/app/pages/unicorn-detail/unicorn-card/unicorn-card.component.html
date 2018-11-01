@@ -11,11 +11,23 @@
                 {{ hobby }}
             </li>
         </ul>
+        capacitiesLabels :
+        <ul>
+            <li *ngFor="let label of unicorn.capacitiesLabels">
+                {{ label }}
+            </li>
+        </ul>
     </mat-card-content>
     <mat-card-actions>
         <button mat-mini-fab color="primary"><mat-icon>edit</mat-icon></button>
         <button mat-mini-fab color="warn"><mat-icon>delete</mat-icon></button>
-        <button mat-mini-fab color="primary"><mat-icon>favorite</mat-icon></button>
+        <button mat-mini-fab
+                [color]="isInCart?'accent':'primary'"
+                (click)="addOrRemoveFromCart()">
+            <mat-icon>favorite</mat-icon>
+        </button>
         <button mat-mini-fab color="primary"><mat-icon>visibility</mat-icon></button>
     </mat-card-actions>
 </mat-card>
+
+

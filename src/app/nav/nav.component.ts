@@ -1,8 +1,9 @@
 import {Component} from '@angular/core';
 import {BreakpointObserver, Breakpoints} from '@angular/cdk/layout';
-import {Observable} from 'rxjs';
+import {BehaviorSubject, Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
 import {Unicorn} from '../shared/models/unicorn.model';
+import {CartService} from '../shared/services/cart.service';
 
 @Component({
     selector: 'uni-nav',
@@ -11,6 +12,7 @@ import {Unicorn} from '../shared/models/unicorn.model';
 })
 export class NavComponent {
 
+    public cart = this.cartService.cart;
 
     isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
         .pipe(
@@ -23,7 +25,13 @@ export class NavComponent {
         alert('HB !');
     }
 
-    constructor(private breakpointObserver: BreakpointObserver) {
+    constructor(private breakpointObserver: BreakpointObserver,
+                private cartService: CartService) {
+
+        // this.cartService.cart.subscribe((cart) => {
+        //     this.nbItems = cart.length;
+        // });
+
         this.myUnicorn = {
             id: 1,
             name: 'Baby',

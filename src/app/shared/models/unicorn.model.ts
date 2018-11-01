@@ -6,4 +6,5 @@ export class Unicorn {
     photo: string;
     hobbies: string[];
     capacities: number[];
+    capacitiesLabels?: string[];
 }
