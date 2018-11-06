@@ -22,7 +22,9 @@
         <button mat-mini-fab
                 color="primary"
                 (click)="openDialog()"><mat-icon>edit</mat-icon></button>
-        <button mat-mini-fab color="warn"><mat-icon>delete</mat-icon></button>
+        <button mat-mini-fab
+                color="warn"
+                (click)="delete()"><mat-icon>delete</mat-icon></button>
         <button mat-mini-fab
                 [color]="isInCart?'accent':'primary'"
                 (click)="addOrRemoveFromCart()">

@@ -6,6 +6,7 @@ import {EditUnicornModalComponent} from './modals/edit-unicorn/edit-unicorn.moda
 import {BehaviorSubject, Observable} from 'rxjs';
 import {State} from '@ngrx/store';
 import {AppState} from '../../../store/app.state';
+import {UnicornService} from '../../services/unicorn.service';
 
 @Component({
     selector: 'uni-unicorn-card',
@@ -20,6 +21,7 @@ export class UnicornCardComponent implements OnInit {
     public isInCart: boolean;
 
     constructor(private cartService: CartService,
+                private unicornService: UnicornService,
                 private matDialog: MatDialog) {
     }
 
@@ -43,10 +45,13 @@ export class UnicornCardComponent implements OnInit {
                 unicorn: {...this.unicorn},
             }
         }).afterClosed().subscribe((updatedUnicorn: Unicorn) => {
-            debugger;
-            // if (updatedUnicorn) {
-            this.unicorn = updatedUnicorn;
-            // }
+            if (updatedUnicorn) {
+                this.unicorn = updatedUnicorn;
+            }
         });
+    }
+
+    public delete() {
+        this.unicornService.delete(this.unicorn).subscribe();
     }
 }

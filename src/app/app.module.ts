@@ -28,6 +28,7 @@ import {StoreModule} from '@ngrx/store';
 import {DevModule, environment} from '../environments/environment';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import {cartReducer} from './store/reducers/cart.reducer';
+import {unicornsReducer} from './store/reducers/unicorns.reducer';
 
 @NgModule({
     declarations: [
@@ -61,6 +62,7 @@ import {cartReducer} from './store/reducers/cart.reducer';
         MatChipsModule,
         StoreModule.forRoot({
             cart: cartReducer,
+            unicorns: unicornsReducer,
         }),
         DevModule,
     ],

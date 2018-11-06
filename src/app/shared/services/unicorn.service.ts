@@ -2,9 +2,12 @@ import {Injectable} from '@angular/core';
 import {Unicorn} from '../models/unicorn.model';
 import {HttpClient} from '@angular/common/http';
 import {from, merge, Observable, zip} from 'rxjs';
-import {filter, flatMap, map, mergeMap, pluck, reduce, tap, toArray} from 'rxjs/operators';
+import {catchError, filter, flatMap, map, mergeMap, pluck, reduce, tap, toArray} from 'rxjs/operators';
 import {CapacityService} from './capacity.service';
 import {Capacity} from '../models/capacity.model';
+import {Store} from '@ngrx/store';
+import {AppState} from '../../store/app.state';
+import {AddUnicorn, EditUnicorn, RemoveUnicorn} from '../../store/actions/unicorns.actions';
 
 @Injectable({
     providedIn: 'root'
@@ -14,6 +17,7 @@ export class UnicornService {
     constructor(
         private http: HttpClient,
         private capacityService: CapacityService,
+        private store: Store<AppState>,
     ) {
     }
 
@@ -35,7 +39,20 @@ export class UnicornService {
 
     update(unicorn: Unicorn): Observable<Unicorn> {
         const id = unicorn.id;
-        return this.http.put(`http://localhost:3000/unicorns/${id}`, unicorn);
+        return this.http.put(`http://localhost:3000/unicorns/${id}`, unicorn).pipe(
+            tap((u: Unicorn) => {
+                this.store.dispatch(new EditUnicorn(u));
+            })
+        );
+    }
+
+    public delete(unicorn: Unicorn): Observable<any> {
+        const id = unicorn.id;
+        return this.http.delete(`http://localhost:3000/unicorns/${id}`).pipe(
+            tap((u: Unicorn) => {
+                this.store.dispatch(new RemoveUnicorn(u));
+            })
+        );
     }
 
     listWithCapacitiesLabels1(): Observable<Unicorn[]> {
@@ -92,6 +109,10 @@ export class UnicornService {
     }
 
     public save(unicorn: Unicorn) {
-        return this.http.post(`http://localhost:3000/unicorns`, unicorn);
+        return this.http.post(`http://localhost:3000/unicorns`, unicorn).pipe(
+            tap((u: Unicorn) => {
+                this.store.dispatch(new AddUnicorn(u));
+            })
+        );
     }
 }
