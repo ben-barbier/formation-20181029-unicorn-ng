@@ -1,0 +1,23 @@
+<form [formGroup]="unicornForm" (ngSubmit)="save()">
+    <mat-form-field>
+        <input type="text" matInput formControlName="name" placeholder="Name"/>
+    </mat-form-field>
+
+    <!--<mat-form-field>-->
+        <!--<mat-chip-list #chipList>-->
+            <!--<mat-chip *ngFor="let fruit of fruits" [selectable]="selectable"-->
+                      <!--[removable]="removable" (removed)="remove(fruit)">-->
+                <!--{{fruit.name}}-->
+                <!--<mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>-->
+            <!--</mat-chip>-->
+            <!--<input placeholder="New fruit..."-->
+                   <!--[matChipInputFor]="chipList"-->
+                   <!--[matChipInputSeparatorKeyCodes]="separatorKeysCodes"-->
+                   <!--[matChipInputAddOnBlur]="addOnBlur"-->
+                   <!--(matChipInputTokenEnd)="add($event)">-->
+        <!--</mat-chip-list>-->
+    <!--</mat-form-field>-->
+
+    <br />
+    <button type="submit" mat-raised-button color="primary">Ajouter</button>
+</form>

@@ -137,5 +137,8 @@
       }
     }
   },
-  "defaultProject": "unicorn-ng"
+  "defaultProject": "unicorn-ng",
+  "cli": {
+    "defaultCollection": "@ngrx/schematics"
+  }
 }

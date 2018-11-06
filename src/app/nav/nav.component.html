@@ -5,9 +5,10 @@
                  [opened]="!(isHandset$ | async)">
         <mat-toolbar>Menu</mat-toolbar>
         <mat-nav-list>
-            <a mat-list-item href="#">Link 1</a>
-            <a mat-list-item href="#">Link 2</a>
-            <a mat-list-item href="#">Link 3</a>
+            <a mat-list-item [routerLink]="['home']" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">Home</a>
+            <a mat-list-item [routerLink]="['unicorns']" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">Unicorns</a>
+            <a mat-list-item [routerLink]="['unicorns', 3]" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">Unicorn 3</a>
+            <a mat-list-item [routerLink]="['add-unicorn']" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">add Unicorn</a>
         </mat-nav-list>
     </mat-sidenav>
     <mat-sidenav-content>
@@ -24,14 +25,7 @@
             <span>size : {{ (cart | async).length }} </span>
         </mat-toolbar>
 
-        <!-- Add Content Here -->
-        <!--<uni-unicorn-detail-->
-            <!--[unicorn]="myUnicorn"-->
-            <!--(ageUpdated)="alertHb()">-->
-        <!--</uni-unicorn-detail>-->
-
-        <uni-unicorn-list></uni-unicorn-list>
-
+        <router-outlet></router-outlet>
 
     </mat-sidenav-content>
 </mat-sidenav-container>

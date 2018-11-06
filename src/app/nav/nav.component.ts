@@ -12,7 +12,7 @@ import {CartService} from '../shared/services/cart.service';
 })
 export class NavComponent {
 
-    public cart = this.cartService.cart;
+    public cart: Observable<Unicorn[]> = this.cartService.cart;
 
     isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
         .pipe(
@@ -32,20 +32,6 @@ export class NavComponent {
         //     this.nbItems = cart.length;
         // });
 
-        this.myUnicorn = {
-            id: 1,
-            name: 'Baby',
-            birthyear: 2018,
-            weight: 10,
-            photo: 'http://0.0.0.0:3000/unicorns/photos/unicorn-1.jpg',
-            hobbies: [
-                'Sleep',
-                'Cry'
-            ], capacities: [
-                1,
-                2
-            ]
-        };
     }
 
 }

@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { UnicornDetailComponent } from './unicorn-detail.component';
+import { EditUnicornModalComponent } from './edit-unicorn.modal.component';
 
-describe('UnicornDetailComponent', () => {
-  let component: UnicornDetailComponent;
-  let fixture: ComponentFixture<UnicornDetailComponent>;
+describe('EditUnicornComponent', () => {
+  let component: EditUnicornModalComponent;
+  let fixture: ComponentFixture<EditUnicornModalComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ UnicornDetailComponent ]
+      declarations: [ EditUnicornModalComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(UnicornDetailComponent);
+    fixture = TestBed.createComponent(EditUnicornModalComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

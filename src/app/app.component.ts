@@ -8,9 +8,4 @@ import {Unicorn} from './shared/models/unicorn.model';
 })
 export class AppComponent {
 
-
-
-    constructor() {
-    }
-
 }

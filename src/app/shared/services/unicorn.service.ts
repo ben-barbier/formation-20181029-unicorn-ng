@@ -29,6 +29,15 @@ export class UnicornService {
         );
     }
 
+    get(id: number): Observable<Unicorn> {
+        return this.http.get<Unicorn>(`http://localhost:3000/unicorns/${id}`);
+    }
+
+    update(unicorn: Unicorn): Observable<Unicorn> {
+        const id = unicorn.id;
+        return this.http.put(`http://localhost:3000/unicorns/${id}`, unicorn);
+    }
+
     listWithCapacitiesLabels1(): Observable<Unicorn[]> {
         return this.list().pipe(
             flatMap(e => e),
@@ -58,6 +67,7 @@ export class UnicornService {
         ).pipe(
             map(([unicorns, capacities]): Unicorn[] => {
                 return unicorns.map((u: Unicorn): Unicorn => {
+                    u.capacities = u.capacities || [];
                     return {
                         ...u, capacitiesLabels: u.capacities.map((c: number): string => {
                             return capacities.find((c2: Capacity) => c2.id === c).label;
@@ -79,5 +89,9 @@ export class UnicornService {
             }, {sumAge: 0, count: 0}),
             map(e => e.sumAge / e.count)
         );
+    }
+
+    public save(unicorn: Unicorn) {
+        return this.http.post(`http://localhost:3000/unicorns`, unicorn);
     }
 }

@@ -1,22 +1,35 @@
 import {Injectable} from '@angular/core';
-import {BehaviorSubject} from 'rxjs';
+import {Observable} from 'rxjs';
 import {Unicorn} from '../models/unicorn.model';
+import {select, State, Store} from '@ngrx/store';
+import {AppState} from '../../store/app.state';
+import {AddToCart, RemoveFromCart} from '../../store/actions/cart.actions';
+import {map} from 'rxjs/operators';
 
-@Injectable(
-    {
+@Injectable({
     providedIn: 'root'
-}
-)
+})
 export class CartService {
 
-    public cart: BehaviorSubject<Unicorn[]> = new BehaviorSubject([]);
-
-    public addToCart(unicorn: Unicorn) {
-        this.cart.next(this.cart.getValue().concat(unicorn));
+    constructor(private store: Store<AppState>) {
     }
 
-    public removeFromCart(unicorn: Unicorn) {
-        this.cart.next(this.cart.getValue().filter(u => u.id !== unicorn.id));
+    public cart: Observable<Unicorn[]> = this.store.pipe(select('cart'));
+
+    public addToCart(unicorn: Unicorn): void {
+        this.store.dispatch(new AddToCart(unicorn));
+    }
+
+    public removeFromCart(unicorn: Unicorn): void {
+        this.store.dispatch(new RemoveFromCart(unicorn));
+    }
+
+    public isInCart(unicorn: Unicorn): Observable<boolean> {
+        return this.cart.pipe(
+            map((unicorns: Unicorn[]) => {
+                return !!unicorns.find(u => u.id === unicorn.id);
+            }),
+        );
     }
 
 }
